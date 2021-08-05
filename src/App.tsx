@@ -5,6 +5,7 @@ import Word from './components/Word';
 import './styles/App.css';
 import { useEffect, useState } from 'react';
 export default function App() {
+  const [ playable, setPlayable ] = useState(true);
   const [ word, setWord ] = useState("");
   const [ correctGuesses, setCorrectGuesses ] = useState([]);
   const [ incorrectGuesses, setIncorrectGuesses ] = useState([]);
@@ -21,7 +22,7 @@ export default function App() {
   useEffect(() => {
     const keyPressed = (e:any) => {
       let regex = new RegExp(/^[a-zA-Z]{1}$/);
-      if(regex.test(e.key) && !!word){
+      if(playable && regex.test(e.key) && !!word){
         if(word.includes(e.key)){
           // @ts-ignore
           setCorrectGuesses(correctGuesses => (!correctGuesses.includes(e.key) && [...correctGuesses, e.key]));
@@ -33,8 +34,6 @@ export default function App() {
     };
     window.addEventListener('keydown', keyPressed);
 
-    // console.log(`correctGuesses: ${correctGuesses}`);
-    // console.log(`incorrectGuesses: ${incorrectGuesses}`);
     return () => window.removeEventListener('keydown', keyPressed);
   }, [correctGuesses, incorrectGuesses, word]);
   
