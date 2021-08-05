@@ -1,0 +1,16 @@
+.letter {
+    width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 30px;
+    font-size: 4rem;
+    border-bottom: 10px solid #4f6cce;
+    color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.visible {
+    color: #000;
+}

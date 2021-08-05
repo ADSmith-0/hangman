@@ -1,0 +1,11 @@
+#main {
+    width: max(80vw, 700px); /*Debatable */
+    margin: auto;
+    display: grid;
+    grid-template: 1fr;
+    gap: 20px;
+}
+
+#title {
+    text-align: center;
+}
