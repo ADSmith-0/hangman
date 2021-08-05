@@ -9,9 +9,10 @@ export default function App() {
   const [ correctGuesses, setCorrectGuesses ] = useState([]);
   const [ incorrectGuesses, setIncorrectGuesses ] = useState([]);
   const generateWord = async ():Promise<string> => {
-      const response = await fetch('https://random-word-api.herokuapp.com/word?number=1&swear=0').then(res => res.json());
-      const word = await response[0];
-      return word;
+      const response = await fetch('https://random-word-api.herokuapp.com/word?number=10&swear=0').then(res => res.json());
+      const words = await response;
+      // @ts-ignore
+      return await words.sort((a:object,b:object) => a.length - b.length)[0];
   }
   useEffect(() => {
     let word = generateWord();
