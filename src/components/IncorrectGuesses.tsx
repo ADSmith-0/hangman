@@ -1,4 +1,4 @@
-export default function IncorrectGuesses() {
+export default function IncorrectGuesses({ incorrectGuesses }:{ incorrectGuesses:string[] }){
     return (
         <div>
             Incorrect Guesses

@@ -20,9 +20,7 @@ export default function App() {
   useEffect(() => {
     const keyPressed = (e:any) => {
       let regex = new RegExp(/^[a-zA-Z]{1}$/);
-      console.log("hello");
       if(regex.test(e.key) && !!word){
-        console.log(word);
         if(word.includes(e.key)){
           // @ts-ignore
           setCorrectGuesses(correctGuesses => (!correctGuesses.includes(e.key) && [...correctGuesses, e.key]));
@@ -34,18 +32,18 @@ export default function App() {
     };
     window.addEventListener('keydown', keyPressed);
 
-    console.log(`correctGuesses: ${correctGuesses}`);
-    console.log(`incorrectGuesses: ${incorrectGuesses}`);
+    // console.log(`correctGuesses: ${correctGuesses}`);
+    // console.log(`incorrectGuesses: ${incorrectGuesses}`);
     return () => window.removeEventListener('keydown', keyPressed);
-  }, [correctGuesses, incorrectGuesses]);
+  }, [correctGuesses, incorrectGuesses, word]);
   
   return (
     <main id="main">
       <h1 id="title">Hangman</h1>
       <Difficulty />
       <Hangman />
-      <IncorrectGuesses />
-      <Word word={word}/>
+      <IncorrectGuesses incorrectGuesses={incorrectGuesses}/>
+      <Word word={word} correctGuesses={correctGuesses}/>
     </main>
   )
 }
