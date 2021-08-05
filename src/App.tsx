@@ -13,34 +13,34 @@ export default function App() {
       const word = await response[0];
       return word;
   }
-  const keyPressed = (e:any) => {
-    let regex = new RegExp(/^[a-zA-Z]{1}$/);
-    console.log(e.key);
-    if(regex.test(e.key) && word){
-      console.log(word);
-      // console.log(e.key);
-      // console.log(word.includes(e.key));
-      if(word.includes(e.key)){
-        // @ts-ignore
-        setCorrectGuesses(correctGuesses => [...correctGuesses, e.key]);
-      }else{
-        // @ts-ignore
-        setIncorrectGuesses(incorrectGuesses => [...incorrectGuesses, e.key]);
-      }
-    }
-  };
   useEffect(() => {
     let word = generateWord();
     word.then(word => setWord(word));
-    // window.addEventListener('keydown', keyPressed);
   }, []);
   useEffect(() => {
+    const keyPressed = (e:any) => {
+      let regex = new RegExp(/^[a-zA-Z]{1}$/);
+      console.log("hello");
+      if(regex.test(e.key) && !!word){
+        console.log(word);
+        if(word.includes(e.key)){
+          // @ts-ignore
+          setCorrectGuesses(correctGuesses => (!correctGuesses.includes(e.key) && [...correctGuesses, e.key]));
+        }else{
+          // @ts-ignore
+          setIncorrectGuesses(incorrectGuesses => (!incorrectGuesses.includes(e.key) && [...incorrectGuesses, e.key]));
+        }
+      }
+    };
+    window.addEventListener('keydown', keyPressed);
+
     console.log(`correctGuesses: ${correctGuesses}`);
     console.log(`incorrectGuesses: ${incorrectGuesses}`);
+    return () => window.removeEventListener('keydown', keyPressed);
   }, [correctGuesses, incorrectGuesses]);
   
   return (
-    <main tabIndex="0" onKeyDown={keyPressed} id="main">
+    <main id="main">
       <h1 id="title">Hangman</h1>
       <Difficulty />
       <Hangman />
