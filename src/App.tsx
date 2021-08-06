@@ -13,6 +13,7 @@ export default function App() {
   const [ definition, setDefinition ] = useState("");
   const [ correctGuesses, setCorrectGuesses ] = useState([]);
   const [ incorrectGuesses, setIncorrectGuesses ] = useState([]);
+  const [ rounds, setRounds ] = useState(0);
   const maxGuesses = 6;
   const generateWord = async ():Promise<string> => {
       const response = await fetch('https://random-words-api.vercel.app/word').then(res => res.json());
@@ -26,6 +27,12 @@ export default function App() {
     let new_str = str.replace(str[0], '');
     return 1 + countUniqueCharacters(new_str);
   }
+  const playAgain = () => {
+    setPlayable(true);
+    setRounds(round => round + 1);
+    setCorrectGuesses([]);
+    setIncorrectGuesses([]);
+  }
   useEffect(() => {
     let word = generateWord();
     word.then(word => {
@@ -34,7 +41,7 @@ export default function App() {
       // @ts-ignore
       setDefinition(word[0].definition);
     });
-  }, []);
+  }, [rounds]);
   useEffect(() => {
     const keyPressed = (e:any) => {
       let regex = new RegExp(/^[a-zA-Z]{1}$/);
@@ -71,7 +78,13 @@ export default function App() {
       <IncorrectGuesses incorrectGuesses={incorrectGuesses}/>
       <Hint definition={definition}/>
       <Word word={word} correctGuesses={correctGuesses}/>
-      {(!playable) && <Popup win={(incorrectGuesses.length < maxGuesses)} word={word} definition={definition}/>}
+      {(!playable) && 
+        <Popup 
+          win={(incorrectGuesses.length < maxGuesses)}
+          word={word}
+          definition={definition}
+          playAgain={playAgain}
+        />}
       <div id={buffer}></div>
     </main>
   )

@@ -17,3 +17,22 @@
 .subtitle {
     font-weight: 600;
 }
+.word, .definition {
+    font-weight: 400;   
+}
+#button {
+    border-radius: 10px;
+    background-color: #fafafa;
+    color: #4f6cce;
+    font-size: 1.8rem;
+    padding: 10px 25px;
+    border: 1px solid #fafafa;
+    transition: all 0.2s linear 0s;
+    cursor: pointer;
+    width: 50%;
+    margin: 0 25%;
+}
+#button:hover {
+    background-color: transparent;
+    color: #fafafa;
+}
