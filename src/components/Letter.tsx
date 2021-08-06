@@ -1,6 +1,6 @@
-import '../styles/Letter.css';
+import styles from '../styles/Letter.module.css';
 export default function Letter({ letter, revealed }:{letter:string, revealed:boolean}) {
     return (
-        <span className={`letter ${revealed?'visible':''}`}>{letter}</span>
+        <span className={`${styles.letter} ${revealed?styles.visible:''}`}>{letter}</span>
     )
 }

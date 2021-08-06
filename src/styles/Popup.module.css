@@ -1,0 +1,13 @@
+#container {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 80vw;
+    grid-template-rows: 99vh;
+    place-items: center;
+}
+#popup {
+    border-radius: 10px;
+    border: 1px solid #000;
+    background-color: #4f6cce;
+    padding: 10px;
+}

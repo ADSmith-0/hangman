@@ -13,6 +13,6 @@
     transition: all 0.2s linear 0s;
 }
 .letter.visible {
-    color: #000;
+    color: #fafafa;
     border-bottom-color: limegreen;
 }

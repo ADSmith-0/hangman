@@ -1,5 +1,5 @@
 import Letter from './Letter';
-import '../styles/Word.css'
+import styles from '../styles/Word.module.css';
 export default function Word({ word, correctGuesses }:{ word:string, correctGuesses:string[] }) {
     const lettersFromWord = (word:string):string[] => {
         const letters:string[] = [];
@@ -7,7 +7,7 @@ export default function Word({ word, correctGuesses }:{ word:string, correctGues
         return letters;
     }
     return (
-        <div id="word">
+        <div id={styles.word}>
             {lettersFromWord(word).filter(letter => letter).map((letter, index) => (
                 <Letter key={index} letter={letter} revealed={correctGuesses.includes(letter)} />
             ))}
