@@ -1,10 +1,12 @@
 import styles from '../styles/Popup.module.css';
-const { container, popup } = styles;
-export default function Popup({ win, word }:{ win:boolean, word:string }) {
+const { container, popup, title, subtitle } = styles;
+export default function Popup({ win, word, definition }:{ win:boolean, word:string, definition:string }) {
     return (
         <section id={container}>
             <div id={popup}>
-                {win ? 'Congratulations you won!':`You lost the word was: ${word}`}
+                <h2 id={title}>{win?'Congratulations you won! 😄':'You Lost! 😓'}</h2>
+                <p className={subtitle}>The word was: <span>{word}</span></p>
+                <p className={subtitle}>Definition: <span>{definition}</span></p>
             </div>
         </section>
     )

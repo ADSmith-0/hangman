@@ -71,7 +71,7 @@ export default function App() {
       <IncorrectGuesses incorrectGuesses={incorrectGuesses}/>
       <Hint definition={definition}/>
       <Word word={word} correctGuesses={correctGuesses}/>
-      {(!playable) && <Popup win={(incorrectGuesses.length < maxGuesses)} word={word}/>}
+      {(!playable) && <Popup win={(incorrectGuesses.length < maxGuesses)} word={word} definition={definition}/>}
       <div id={buffer}></div>
     </main>
   )
