@@ -1,22 +1,24 @@
 import Difficulty from './components/Difficulty';
 import Hangman from './components/Hangman';
 import IncorrectGuesses from './components/IncorrectGuesses';
+import Hint from './components/Hint';
 import Word from './components/Word';
 import Popup from './components/Popup';
 import { useEffect, useState } from 'react';
 import styles from './styles/App.module.css';
-const { main, title } = styles;
+const { main, title, buffer } = styles;
 export default function App() {
   const [ playable, setPlayable ] = useState(true);
   const [ word, setWord ] = useState("");
+  const [ definition, setDefinition ] = useState("");
   const [ correctGuesses, setCorrectGuesses ] = useState([]);
   const [ incorrectGuesses, setIncorrectGuesses ] = useState([]);
   const maxGuesses = 6;
   const generateWord = async ():Promise<string> => {
-      const response = await fetch('https://random-word-api.herokuapp.com/word?number=10&swear=0').then(res => res.json());
-      const words = await response;
+      const response = await fetch('https://random-words-api.vercel.app/word').then(res => res.json());
+      const word = await response;
       // @ts-ignore
-      return await words.sort((a:object,b:object) => a.length - b.length)[0];
+      return word;
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const countUniqueCharacters = (str:string):number => {
@@ -26,7 +28,12 @@ export default function App() {
   }
   useEffect(() => {
     let word = generateWord();
-    word.then(word => setWord(word));
+    word.then(word => {
+      // @ts-ignore
+      setWord(word[0].word);
+      // @ts-ignore
+      setDefinition(word[0].definition);
+    });
   }, []);
   useEffect(() => {
     const keyPressed = (e:any) => {
@@ -62,8 +69,10 @@ export default function App() {
       <Difficulty />
       <Hangman guesses={incorrectGuesses.length} />
       <IncorrectGuesses incorrectGuesses={incorrectGuesses}/>
+      <Hint definition={definition}/>
       <Word word={word} correctGuesses={correctGuesses}/>
       {(!playable) && <Popup win={(incorrectGuesses.length < maxGuesses)} word={word}/>}
+      <div id={buffer}></div>
     </main>
   )
 }

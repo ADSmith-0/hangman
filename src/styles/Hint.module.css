@@ -1,0 +1,23 @@
+#button {
+    background-color: #4747ee;
+    color: #fafafa;
+    border-radius: 10px;
+    border: 1px solid #4747ee;
+    padding: 10px 25px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.2s linear 0s;
+}
+#button:hover {
+    transform: translateY(-3px);
+    background-color: #5a5af5;
+    border-color: #5a5af5;
+}
+#hint {
+    color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#hint.visible { color: #fafafa; }
