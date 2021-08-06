@@ -4,6 +4,7 @@
     display: grid;
     grid-template: 1fr;
     gap: 20px;
+    font-size: 2rem;
 }
 
 #title {

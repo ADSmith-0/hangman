@@ -25,17 +25,22 @@ export default function App() {
       if(playable && regex.test(e.key) && !!word){
         if(word.includes(e.key)){
           // @ts-ignore
-          setCorrectGuesses(correctGuesses => (!correctGuesses.includes(e.key) && [...correctGuesses, e.key]));
+          setCorrectGuesses(correctGuesses => (!correctGuesses.includes(e.key) ? [...correctGuesses, e.key]:[...correctGuesses]));
         }else{
           // @ts-ignore
-          setIncorrectGuesses(incorrectGuesses => (!incorrectGuesses.includes(e.key) && [...incorrectGuesses, e.key]));
+          setIncorrectGuesses(incorrectGuesses => (!incorrectGuesses.includes(e.key) ? [...incorrectGuesses, e.key]: [...incorrectGuesses]));
         }
       }
     };
     window.addEventListener('keydown', keyPressed);
 
     return () => window.removeEventListener('keydown', keyPressed);
-  }, [correctGuesses, incorrectGuesses, word]);
+  }, [correctGuesses, incorrectGuesses, word, playable]);
+  useEffect(() => {
+    if(incorrectGuesses.length >= 5){
+      setPlayable(false);
+    }
+  }, [incorrectGuesses]);
   
   return (
     <main id="main">

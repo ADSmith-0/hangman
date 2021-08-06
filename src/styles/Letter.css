@@ -10,7 +10,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    transition: all 0.2s linear 0s;
 }
-.visible {
+.letter.visible {
     color: #000;
+    border-bottom-color: limegreen;
 }
