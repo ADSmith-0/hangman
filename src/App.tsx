@@ -37,7 +37,7 @@ export default function App() {
     let word = generateWord();
     word.then(word => {
       // @ts-ignore
-      setWord(word[0].word);
+      setWord(word[0].word.toLowerCase());
       // @ts-ignore
       setDefinition(word[0].definition);
     });
