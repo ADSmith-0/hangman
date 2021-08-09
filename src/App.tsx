@@ -24,7 +24,8 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const countUniqueCharacters = (str:string):number => {
     if(str.length === 0) return 0;
-    let new_str = str.replace(str[0], '');
+    let new_str = "";
+    for(let letter of str) if(letter !== str[0]) new_str += letter;
     return 1 + countUniqueCharacters(new_str);
   }
   const revealHint = () => setHintRevealed(true);
@@ -62,8 +63,8 @@ export default function App() {
     return () => window.removeEventListener('keydown', keyPressed);
   }, [correctGuesses, incorrectGuesses, word, playable]);
   useEffect(() => {
-    console.log(`correctGuesses.length:${correctGuesses.length}`);
-    console.log(``);
+    console.log(`correctGuesses.length: ${correctGuesses.length}`);
+    console.log(`countUniqueCharacters(word): ${countUniqueCharacters(word)}`);
     if(correctGuesses.length === countUniqueCharacters(word) && word !== ""){
       setPlayable(false);
     }
