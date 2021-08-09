@@ -1,4 +1,3 @@
-import Difficulty from './components/Difficulty';
 import Hangman from './components/Hangman';
 import IncorrectGuesses from './components/IncorrectGuesses';
 import Hint from './components/Hint';
@@ -14,6 +13,7 @@ export default function App() {
   const [ correctGuesses, setCorrectGuesses ] = useState([]);
   const [ incorrectGuesses, setIncorrectGuesses ] = useState([]);
   const [ rounds, setRounds ] = useState(0);
+  const [ hintRevealed, setHintRevealed ] = useState(false);
   const maxGuesses = 6;
   const generateWord = async ():Promise<string> => {
       const response = await fetch('https://random-words-api.vercel.app/word').then(res => res.json());
@@ -27,11 +27,13 @@ export default function App() {
     let new_str = str.replace(str[0], '');
     return 1 + countUniqueCharacters(new_str);
   }
+  const revealHint = () => setHintRevealed(true);
   const playAgain = () => {
     setPlayable(true);
     setRounds(round => round + 1);
     setCorrectGuesses([]);
     setIncorrectGuesses([]);
+    setHintRevealed(false);
   }
   useEffect(() => {
     let word = generateWord();
@@ -60,8 +62,8 @@ export default function App() {
     return () => window.removeEventListener('keydown', keyPressed);
   }, [correctGuesses, incorrectGuesses, word, playable]);
   useEffect(() => {
-    // console.log(correctGuesses);
-    // console.log(countUniqueCharacters(word));
+    console.log(`correctGuesses.length:${correctGuesses.length}`);
+    console.log(``);
     if(correctGuesses.length === countUniqueCharacters(word) && word !== ""){
       setPlayable(false);
     }
@@ -73,10 +75,9 @@ export default function App() {
   return (
     <main id={main}>
       <h1 id={title}>Hangman</h1>
-      <Difficulty />
       <Hangman guesses={incorrectGuesses.length} />
       <IncorrectGuesses incorrectGuesses={incorrectGuesses}/>
-      <Hint definition={definition}/>
+      <Hint definition={definition} revealed={hintRevealed} onReveal={revealHint}/>
       <Word word={word} correctGuesses={correctGuesses}/>
       {(!playable) && 
         <Popup 

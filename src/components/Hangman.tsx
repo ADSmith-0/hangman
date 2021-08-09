@@ -11,7 +11,7 @@ export default function Hangman({ guesses }:{guesses:number}) {
             <line x1="60" y1="0" x2="160" y2="0" style={line_style} />
             <line x1="160" y1="0" x2="160" y2="30" style={line_style} />
             {/* Head */}
-            {(guesses >= 1) && <circle cx="160" cy="55" r="25" stroke="#fff" stroke-width="5" fill="none" />}
+            {(guesses >= 1) && <circle cx="160" cy="55" r="25" stroke="#fff" strokeWidth="5" fill="none" />}
             {/* Body */}
             {(guesses >= 2) && <line x1="160" y1="80" x2="160" y2="150" style={line_style} />}
             {/* Left arm */}

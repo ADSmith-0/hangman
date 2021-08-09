@@ -4,8 +4,11 @@ export default function IncorrectGuesses({ incorrectGuesses }:{ incorrectGuesses
     return (
         <div>
             <strong>Incorrect Guesses:</strong><br/>
-            {/* @ts-ignore */}
-            <div id={styles.incorrectGuesses}>{getGuesses()}</div>
+            {
+                (incorrectGuesses.length !== 0) ? 
+                    <div id={styles.incorrectGuesses}>{getGuesses()}</div> :
+                    <div style={{height: '2.4rem'}}></div>
+            }
         </div>
     )
 }

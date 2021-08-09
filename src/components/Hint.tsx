@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import styles from '../styles/Hint.module.css';
 const { button } = styles;
-export default function Hint({ definition }:{definition:string}) {
-    const [ revealed, setRevealed ] = useState(false);
-    const revealHint = (e:any) => setRevealed(true);
+export default function Hint({ definition, revealed, onReveal }:{definition:string, revealed:boolean, onReveal:any}) {
     return (
         <div>
-            <button id={button} onClick={revealHint}>Hint</button>
+            <button id={button} onClick={onReveal}>Hint</button>
             <div id={styles.hint} className={(revealed)?styles.visible:''}>{definition}</div>        
         </div>
     )
