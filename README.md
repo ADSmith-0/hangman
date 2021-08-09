@@ -5,4 +5,4 @@ Hangman game built in React
 
 ## **⚠️ Warning ⚠️** It's ridiculously hard as I don't have any control over which word it sends.
 
-## **Live here:** [https://zealous-elion-b18ad7.netlify.app/](https://zealous-elion-b18ad7.netlify.app/)
+## **Live here:** https://zealous-elion-b18ad7.netlify.app/
